@@ -3,7 +3,6 @@ package com.example.stevendeweillepset6;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,9 +17,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
+/*
+ * Show list of all users with their scores. Updated real-time.
+ */
 public class HighscoresActivity extends AppCompatActivity implements View.OnClickListener {
 
     private DatabaseReference db;
@@ -29,7 +30,6 @@ public class HighscoresActivity extends AppCompatActivity implements View.OnClic
     private ScoreAdapter adapter;
     private ArrayList<String> emails;
     private ArrayList<Long> scores;
-    //private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,31 +60,29 @@ public class HighscoresActivity extends AppCompatActivity implements View.OnClic
         ListView list = (ListView) findViewById(R.id.scorelist);
         adapter = new ScoreAdapter(HighscoresActivity.this, emails, scores);
         list.setAdapter(adapter);
-        scores.add(Long.valueOf(340));
-        scores.add(Long.valueOf(34351));
-        scores.add(Long.valueOf(8402));
-        emails.add("testt");
-        emails.add("testt2");
-        emails.add("testt3");
 
         // Load all users and scores from database (and update realtime)
         db.child("users").addValueEventListener (
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
-                        System.out.println(snapshot.toString());
                         getScores((Map<String,Object>) snapshot.getValue());
                         adapter.notifyDataSetChanged();
                     }
                     @Override
                     public void onCancelled(DatabaseError databaseError) {
-                        //
+                        System.out.println(databaseError.toString());
                     }
                 }
         );
     }
 
+    /*
+     * Fill emails and scores lists from info from database
+     */
     public void getScores(Map<String,Object> users) {
+        emails.clear();
+        scores.clear();
         for (Map.Entry<String, Object> entry : users.entrySet()) {
             Map singleUser = (Map) entry.getValue();
             //System.out.println(singleUser.toString());
@@ -93,6 +91,9 @@ public class HighscoresActivity extends AppCompatActivity implements View.OnClic
         }
     }
 
+    /*
+     * Handle button clicks
+     */
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.home_button:
@@ -108,28 +109,6 @@ public class HighscoresActivity extends AppCompatActivity implements View.OnClic
                 adapter.notifyDataSetChanged();
                 break;
         }
-
     }
-    public void addTest(View view) {
-        //user.updateScore(10);
-        Toast.makeText(this, "Score increased",
-                Toast.LENGTH_SHORT).show();
-        if (uid != null) {
-            db.child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot snapshot) {
-                    Map singleUser = (Map) snapshot.getValue();
-                    Long oldScore = (Long) singleUser.get("score");
-                    //Long oldScore = snapshot.getValue().get("score");
-                    Long newScore = oldScore + 10;
-                    db.child("users").child(uid).child("score").setValue(newScore);
-                }
-                @Override
-                public void onCancelled(DatabaseError firebaseError) {
-                    Log.w("A", "Failed to retrieve score.");
-                }
-            });
-        }
 
-    }
 }

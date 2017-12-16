@@ -1,7 +1,6 @@
 package com.example.stevendeweillepset6;
 
 import android.content.Intent;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -11,15 +10,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+/*
+Home screen, with SignUp and LogIn fragments
+ */
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     public static Button logInButton;
     public static boolean loggedIn;
 
@@ -27,10 +25,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         logInButton = findViewById(R.id.login_button);
-
         mAuth = FirebaseAuth.getInstance();
-
     }
 
     @Override
@@ -53,12 +50,17 @@ public class MainActivity extends AppCompatActivity {
             Log.d("signed out", "onAuthStateChanged:signed_out:");
         }
     }
-    //@Override
+
+    /*
+    Handle button clicks: open right fragment or activity
+     */
     public void onClick(View view) {
         switch (view.getId()) {
+
             case R.id.login_button:
                 // Log in if not already logged in
                 if (!loggedIn) {
+                    // Open login fragment
                     FragmentManager fm = getSupportFragmentManager();
                     LogInFragment fragment = new LogInFragment();
                     FragmentTransaction ft = fm.beginTransaction();
@@ -78,9 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             case R.id.signup_button:
-                //String email = "hoi2@test.com";
-                //String password = "hoitest";
-                //createUser(email, password);
+                // Open sign up fragment
                 FragmentManager fm = getSupportFragmentManager();
                 SignUpFragment fragment = new SignUpFragment();
                 FragmentTransaction ft = fm.beginTransaction();
@@ -88,13 +88,16 @@ public class MainActivity extends AppCompatActivity {
                 ft.addToBackStack(null);
                 ft.commit();
                 break;
+
             case R.id.highscores_button:
                 startActivity(new Intent(this, HighscoresActivity.class));
                 break;
+
             case R.id.help_button:
                 Toast.makeText(MainActivity.this, "Not implemented yet.",
                         Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.play_button:
                 Toast.makeText(MainActivity.this, "Have fun.",
                         Toast.LENGTH_SHORT).show();
@@ -102,28 +105,5 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    public void createUser(String email, String password) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d("create user", "createUserWithEmail:success");
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w("create user", "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-                            updateUI(null);
-                        }
 
-                        // ...
-                    }
-                });
-
-
-    }
 }

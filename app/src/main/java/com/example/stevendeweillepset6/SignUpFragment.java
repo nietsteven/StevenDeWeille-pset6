@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -24,9 +23,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
 /**
- * A simple {@link Fragment} subclass.
+ * Let user sign up with email address and password (must be 6 characters or more).
  */
 public class SignUpFragment extends DialogFragment implements View.OnClickListener{
     private FirebaseAuth mAuth;
@@ -40,11 +38,14 @@ public class SignUpFragment extends DialogFragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sign_up, container, false);
+
         mAuth = mAuth = FirebaseAuth.getInstance();
         emailView = (EditText) view.findViewById(R.id.emailSignUp);
         pw1View = (EditText) view.findViewById(R.id.password1);
         pw2View = (EditText) view.findViewById(R.id.password2);
         Button signUpButton = (Button) view.findViewById(R.id.signup_confirm);
+
+        // Load database instance
         db = FirebaseDatabase.getInstance().getReference();
         signUpButton.setOnClickListener(this);
         return view;
@@ -53,23 +54,26 @@ public class SignUpFragment extends DialogFragment implements View.OnClickListen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public void onClick(View view) {
+        // Check if all fields are actually filled in
         if (emailView.getText() != null && pw1View.getText() != null && pw2View.getText() != null &&
                 emailView.getText().toString().length() > 0 && pw1View.getText().toString().length() > 0
                 && pw2View.getText().toString().length() > 0) {
             String email = emailView.getText().toString();
             String pw1 = pw1View.getText().toString();
             String pw2 = pw2View.getText().toString();
+
+            // Check if both passwords are the same
             if (!pw1.equals(pw2)) {
                 Toast.makeText(getContext(), "Passwords do not match.",
                         Toast.LENGTH_SHORT).show();
             }
             else {
-                if (!(pw1.length() > 6)) {
+                // Check if password is long enough
+                if (!(pw1.length() > 5)) {
                     Toast.makeText(getContext(), "Your password must be longer than 6 characters.",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -78,13 +82,16 @@ public class SignUpFragment extends DialogFragment implements View.OnClickListen
                 }
             }
         }
+
         else {
-            Toast.makeText(getContext(), "Please fill in all the fields.",
+            Toast.makeText(getContext(), "Please fill in all fields.",
                     Toast.LENGTH_SHORT).show();
         }
     }
 
-
+    /*
+     * Add new user to authentication database and score database
+     */
     public void createUser(final String email, String password) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -94,27 +101,29 @@ public class SignUpFragment extends DialogFragment implements View.OnClickListen
                             // Sign in success, update UI with the signed-in user's information
                             Log.d("create user", "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-
                             Toast.makeText(getContext(), "Registration succesfull.",
                                     Toast.LENGTH_SHORT).show();
+
                             // Add to score database
                             db.child("users").child(user.getUid()).child("email").setValue(email);
                             db.child("users").child(user.getUid()).child("score").setValue(1);
+
+                            // Return to MainActivity
                             closeFragment();
-                            //updateUI(user);
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("create user", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(getContext(), "Registration failed.",
                                     Toast.LENGTH_SHORT).show();
-                            //updateUI(null);
                         }
-
-                        // ...
                     }
                 });
     }
 
+    /*
+     * Close current fragment and go back to parent activity
+     */
     private void closeFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

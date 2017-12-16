@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -20,25 +19,21 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 
 /**
- * A simple {@link Fragment} subclass.
+ * Let user sign in with email address and password
  */
 public class LogInFragment extends DialogFragment implements View.OnClickListener{
     private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     private EditText emailView;
     private EditText pwView;
-    //private boolean loggedIn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //loggedIn = false;
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_log_in, container, false);
+
         mAuth = mAuth = FirebaseAuth.getInstance();
         emailView = (EditText) view.findViewById(R.id.email);
         pwView = (EditText) view.findViewById(R.id.password);
@@ -50,11 +45,11 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public void onClick(View view) {
+        // Check if email and password are filled in
         if (emailView.getText() != null && pwView.getText() != null &&
                 emailView.getText().toString().length() > 0 && pwView.getText().toString().length() > 0) {
             String email = emailView.getText().toString();
@@ -67,7 +62,9 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
         }
     }
 
-
+    /*
+     * Log in from authentication database
+     */
     public void logIn(String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
@@ -80,19 +77,22 @@ public class LogInFragment extends DialogFragment implements View.OnClickListene
                                     Toast.LENGTH_SHORT).show();
                             MainActivity.loggedIn = true;
                             MainActivity.logInButton.setText("LOG OUT");
+                            // Return to MainActivity
                             closeFragment();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("Log in", "signInWithEmail:failure", task.getException());
                             Toast.makeText(getContext(), "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
-
-                        // ...
                     }
                 });
     }
 
+    /*
+     * Close current fragment and go back to parent activity
+     */
     private void closeFragment() {
         FragmentManager fm = getFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();

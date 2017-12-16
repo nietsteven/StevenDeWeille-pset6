@@ -29,7 +29,8 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/category_spinner">
+            android:id="@+id/category_spinner"
+            android:entries="@array/categories_array">
         </Spinner>
     </LinearLayout>
     <LinearLayout
@@ -46,7 +47,8 @@
         <Spinner
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/difficulty_spinner">
+            android:id="@+id/difficulty_spinner"
+            android:entries="@array/difficulties_array">
         </Spinner>
     </LinearLayout>
     <Button

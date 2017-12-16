@@ -10,6 +10,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="16dp"
+        android:layout_marginHorizontal="10dp"
         android:text="Question"
         android:textColor="@color/poisonGreen"
         android:id="@+id/question"/>
@@ -17,6 +19,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ANSWER 1"
+        android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/poisonGreen"
         android:textColor="@color/grayBlue"
         android:id="@+id/answer1"/>
@@ -24,6 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ANSWER 2"
+        android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/poisonGreen"
         android:textColor="@color/grayBlue"
         android:id="@+id/answer2"/>
@@ -31,6 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ANSWER 3"
+        android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/poisonGreen"
         android:textColor="@color/grayBlue"
         android:id="@+id/answer3"/>
@@ -38,7 +43,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ANSWER 4"
+        android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/poisonGreen"
         android:textColor="@color/grayBlue"
         android:id="@+id/answer4"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:background="@color/grayBlueLight"
+        android:id="@+id/answered_layout"
+        android:layout_gravity="center">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Correct answer:"
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="@color/poisonGreen"
+                android:textSize="12dp"
+                android:id="@+id/correct_answer"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Points earned:  "
+                android:textSize="12dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:textColor="@color/poisonGreen"
+                android:textSize="12dp"
+                android:id="@+id/points_earned"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="NEXT QUESTION"
+                android:backgroundTint="@color/poisonGreen"
+                android:id="@+id/next_button"
+                android:textColor="@color/grayBlue"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:backgroundTint="@color/poisonGreen"
+                android:textColor="@color/grayBlue"
+                android:id="@+id/back_button"
+                android:text="BACK"/>
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

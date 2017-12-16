@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Steven on 15-12-2017.
+ * Loads email and score lists into listview
  */
 
 public class ScoreAdapter extends ArrayAdapter {
@@ -19,8 +19,8 @@ public class ScoreAdapter extends ArrayAdapter {
     ArrayList<Long> scores;
     LayoutInflater inflater;
 
+    // Constructor
     public ScoreAdapter(Context context, ArrayList<String> emails, ArrayList<Long> scores) {
-
         super(context, R.layout.mylistlayout);
 
         this.context= context;
@@ -33,13 +33,17 @@ public class ScoreAdapter extends ArrayAdapter {
     public View getView(int index, View view, ViewGroup parent) {
         view = inflater.inflate(R.layout.mylistlayout, parent, false);
 
+        // Get views and data
         TextView nameView = (TextView) view.findViewById(R.id.nameview);
         TextView scoreView = (TextView) view.findViewById(R.id.scoreview);
 
         String userEmail = this.emails.get(index);
         Long userScore = this.scores.get(index);
+
+        // Fill textviews
         nameView.setText(userEmail);
         scoreView.setText(userScore.toString());
+
         return view;
     }
 
