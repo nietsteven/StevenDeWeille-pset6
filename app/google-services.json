@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "170749628569",
+    "firebase_url": "https://stevendeweillepset6.firebaseio.com",
+    "project_id": "stevendeweillepset6",
+    "storage_bucket": "stevendeweillepset6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:170749628569:android:eb0d49d3dec157a6",
+        "android_client_info": {
+          "package_name": "com.example.stevendeweillepset6"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "170749628569-8eision4mvos11guenos702l6b5ivb3o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.stevendeweillepset6",
+            "certificate_hash": "5533c7f9e7ea4273d8226fd20e3b0ce9f947d97b"
+          }
+        },
+        {
+          "client_id": "170749628569-nu5cpm3caugpt70jnehe42i06c7bnc5u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKZywMH937QPc-HadPAG7c75WDq2vfses"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "170749628569-nu5cpm3caugpt70jnehe42i06c7bnc5u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

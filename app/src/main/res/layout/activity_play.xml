@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayBlue"
+    android:orientation="vertical"
+    tools:context="com.example.stevendeweillepset6.PlayActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Question"
+        android:textColor="@color/poisonGreen"
+        android:id="@+id/question"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ANSWER 1"
+        android:backgroundTint="@color/poisonGreen"
+        android:textColor="@color/grayBlue"
+        android:id="@+id/answer1"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ANSWER 2"
+        android:backgroundTint="@color/poisonGreen"
+        android:textColor="@color/grayBlue"
+        android:id="@+id/answer2"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ANSWER 3"
+        android:backgroundTint="@color/poisonGreen"
+        android:textColor="@color/grayBlue"
+        android:id="@+id/answer3"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ANSWER 4"
+        android:backgroundTint="@color/poisonGreen"
+        android:textColor="@color/grayBlue"
+        android:id="@+id/answer4"/>
+</LinearLayout>

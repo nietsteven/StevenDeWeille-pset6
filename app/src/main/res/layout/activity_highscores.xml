@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/grayBlue"
+    android:orientation="vertical"
+    tools:context="com.example.stevendeweillepset6.HighscoresActivity">
+    <ImageView
+        android:id="@+id/start_image"
+        android:layout_width="match_parent"
+        android:layout_height="140dp"
+        android:gravity="top"
+        android:layout_marginHorizontal="10dp"
+        android:src="@drawable/trivia_logo" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/poisonGreen"
+        android:text="Highscores"
+        android:textSize="36dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"/>
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/grayBlueLight"
+        android:id="@+id/scorelist"
+        android:layout_weight="1"></ListView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/poisonGreen"
+            android:textColor="@color/grayBlue"
+            android:text="HOME"
+            android:textSize="20dp"
+            android:id="@+id/home_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/poisonGreen"
+            android:textColor="@color/grayBlue"
+            android:text="PLAY"
+            android:textSize="20dp"
+            android:id="@+id/start_play_button"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/poisonGreen"
+            android:textColor="@color/grayBlue"
+            android:text="RESET SCORE"
+            android:textSize="20dp"
+            android:id="@+id/reset_button" />
+    </LinearLayout>
+</LinearLayout>
