@@ -105,8 +105,12 @@ public class HighscoresActivity extends AppCompatActivity implements View.OnClic
                 startActivity(new Intent(this, StartActivity.class));
                 break;
             case R.id.reset_button:
-                db.child("users").child(uid).child("score").setValue(0);
-                adapter.notifyDataSetChanged();
+                // Check if logged in
+                FirebaseUser currentUser = mAuth.getCurrentUser();
+                if (currentUser != null) {
+                    db.child("users").child(uid).child("score").setValue(0);
+                    adapter.notifyDataSetChanged();
+                }
                 break;
         }
     }
